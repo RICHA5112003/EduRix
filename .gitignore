@@ -1,0 +1,6 @@
+.env
+__pycache__/
+*.pyc
+uploads/
+*.sqlite3
+instance/
