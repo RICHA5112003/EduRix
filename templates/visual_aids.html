@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% block content %}
+<h2>Generate Visual Aids</h2>
+<p>
+    Create a diagram with us!
+</p>
+<nav class="navbar">
+    <a href="/generate-content">Content</a>
+    <a href="/generate-worksheet">Worksheets</a>
+     <a href="/generate-quiz">Quiz</a>
+    <a href="/knowledge-base">Knowledge Base</a>
+   
+</nav>
+
+<form method="POST">
+    
+    <label for="description">Topic or Concept Description:</label><br>
+    <textarea name="description" rows="4" placeholder="e.g. Show the water cycle as a simple diagram with arrows..."></textarea><br><br>
+
+    <label for="language">Preferred Language:</label>
+    <select name="language">
+        <option value="English">English</option>
+        <option value="Assamese">Assamese</option>
+        <option value="Hindi">Hindi</option>
+        <option value="Marathi">Marathi</option>
+    </select><br><br>
+
+    <button type="submit">Generate</button>
+</form>
+
+{% if result %}
+    <h3>Generated Visual Aid:</h3>
+    <div class="mermaid">
+        {{ result | safe }}
+    </div>
+{% endif %}
+{% endblock %}

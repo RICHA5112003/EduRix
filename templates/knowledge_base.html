@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+{% block content %}
+<nav class="navbar">
+    <a href="/generate-content">Content</a>
+    <a href="/generate-worksheet">Worksheets</a>
+    <a href="/generate-quiz">Quiz</a>
+    <a href="/visual-aids">Visual Aids</a>
+</nav>
+
+<h2>Ask a Question</h2>
+
+<form method="POST">
+    <label for="question">Enter Your Question:</label><br>
+    <textarea name="question" placeholder="Why is the sky blue?" required></textarea><br><br>
+
+    <label for="language">Preferred Language:</label><br>
+    <select name="language" required>
+        <option value="english">English</option>
+        <option value="assamese">Assamese</option>
+        <option value="hindi">Hindi</option>
+        <option value="marathi">Marathi</option>
+    </select><br><br>
+
+    <button type="submit">Answer</button>
+</form>
+
+{% if result %}
+    <h3>Explanation:</h3>
+    <div class="output">{{ result.replace('\n', '<br>')|safe }}</div>
+{% endif %}
+
+{% endblock %}

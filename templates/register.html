@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register | EduRix</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #0056b3;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #0056b3;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #003d80;
+    }
+
+    .message {
+      text-align: center;
+      color: green;
+      margin-top: 10px;
+      font-size: 14px;
+      display: none;
+    }
+
+    p {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    a {
+      color: #0056b3;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Register to EduRix</h2>
+
+    <input type="text" id="name" placeholder="Enter your name" />
+    <input type="email" id="email" placeholder="Enter your email" />
+    <input type="password" id="password" placeholder="Create a password" />
+    <input type="text" id="photo" placeholder="Profile photo URL (optional)" />
+    <button id="register-btn">Register</button>
+
+    <div class="message" id="success-msg">✅ Registration successful! Redirecting to login...</div>
+
+    <p>Already registered? <a href="/login">Login here</a></p>
+  </div>
+
+  <script>
+    document.getElementById("register-btn").addEventListener("click", async () => {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const photo = document.getElementById("photo").value.trim();
+
+      if (!name || !email || !password) {
+        alert("Please fill all required fields.");
+        return;
+      }
+
+      const res = await fetch("/register-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password, photo })
+      });
+
+      const data = await res.json();
+      if (res.ok) {
+        document.getElementById("success-msg").style.display = "block";
+        setTimeout(() => window.location.href = "/login", 1500);
+      } else {
+        alert(data.error || "Registration failed.");
+      }
+    });
+  </script>
+</body>
+</html>

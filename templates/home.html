@@ -1,0 +1,35 @@
+<!-- home.html -->
+{% extends "index.html" %}
+
+{% block content %}
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2>Welcome to EduRix</h2>
+    <form action="/logout" method="get">
+      <button type="submit" style="background-color: #ff4d4d; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer;">
+        Logout
+      </button>
+    </form>
+  </div>
+
+  <p>Your AI-powered teaching assistant for culturally relevant, multi-grade classroom support.</p>
+
+  <div class="start-buttons">
+    <a href="/generate-content" class="start-btn">Start Content Creation</a>
+    <a href="/generate-worksheet" class="start-btn">Worksheets</a>
+    <a href="/knowledge-base" class="start-btn">Knowledge Base</a>
+    <a href="/visual-aids" class="start-btn">Visual Aids</a>
+    <a href="/quiz_generator" class="start-btn">Generate a Quiz</a>
+    
+  </div>
+{% endblock %}
+
+<!-- Optional script for TTS (can be included in content page) -->
+<script>
+function speakContent() {
+    const text = document.querySelector('.output')?.innerText || "Nothing to read";
+    const utterance = new SpeechSynthesisUtterance(text);
+    speechSynthesis.speak(utterance);
+}
+</script>
+
+<button onclick="speakContent()">Read Aloud</button>

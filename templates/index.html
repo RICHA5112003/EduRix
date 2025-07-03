@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Teaching Assistant - EduRix</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+      .flashes {
+        list-style-type: none;
+        padding: 10px;
+        margin: 10px auto;
+        max-width: 600px;
+        text-align: center;
+      }
+
+      .flash {
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .flash.success {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .flash.error {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+        background-color: #f4f4f4;
+      }
+
+      .auth-buttons {
+        margin-left: auto;
+      }
+
+      .auth-btn {
+        background-color: #f44336;
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .auth-btn:hover {
+        background-color: #d32f2f;
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>EduRix</h1>
+        
+        {% if session.get('authenticated') and request.path not in ['/', '/login', '/register'] %}
+        <div class="auth-buttons">
+            <form action="{{ url_for('logout') }}" method="get" style="display: inline;">
+                <button type="submit" class="auth-btn">Logout</button>
+            </form>
+        </div>
+        {% endif %}
+    </header>
+
+    <!-- 🔔 Flash message area -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="flash {{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; Richa</p>
+    </footer>
+
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+      mermaid.initialize({ startOnLoad: true });
+    </script>
+</body>
+</html>

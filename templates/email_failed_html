@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head><title>Verification Failed</title></head>
+<body>
+  <h2> Verification Failed</h2>
+  <p>{{ reason }}</p>
+  <a href="/register">Try Again</a>
+</body>
+</html>

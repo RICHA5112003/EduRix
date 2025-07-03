@@ -1,0 +1,20 @@
+<!-- templates/upload_materials.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload files</title>
+</head>
+<body>
+    <h1>Upload Image or PDF</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".pdf, .png, .jpg, .jpeg" required>
+        <br><br>
+        <button type="submit">Extract Text</button>
+    </form>
+
+    {% if extracted_text %}
+        <h2>Extracted Text:</h2>
+        <pre>{{ extracted_text }}</pre>
+    {% endif %}
+</body>
+</html>

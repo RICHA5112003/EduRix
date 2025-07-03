@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+{% block content %}
+<h2>How can I help you?</h2>
+   <nav class="navbar">
+   
+    <a href="/generate-worksheet">Worksheets</a>
+     <a href="/generate-quiz">Quiz</a>
+    <a href="/knowledge-base">Knowledge Base</a>
+    <a href="/visual-aids">Visual Aids</a>
+
+</nav>
+
+<form method="POST">
+    <label for="prompt">Your Request:</label><br>
+    <textarea name="prompt" placeholder="e.g. Create a story about farmers and soil types..." required></textarea><br>
+
+    <label for="language">Preferred Language:</label>
+    <select name="language">
+        <option value="english">English</option>
+        <option value="assamese">Assamese</option>
+        <option value="hindi">Hindi</option>
+        <option value="marathi">Marathi</option>
+    </select><br><br>
+
+    <button type="submit">Generate</button>
+</form>
+
+{% if result %}
+    <h3>Generated Content:</h3>
+    <div class="output">{{ result }}</div>
+{% endif %}
+{% endblock %}

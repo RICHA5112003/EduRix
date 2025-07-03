@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% block content %}
+<div style="text-align: center; max-width: 600px; margin: auto;">
+  <h2>Generate Worksheets</h2>
+
+  <nav class="navbar" style="margin-bottom: 20px;">
+    <a href="/generate-content">Content</a>
+    <a href="/quiz_generator">Quiz</a>
+    <a href="/knowledge-base">Knowledge Base</a>
+    <a href="/visual-aids">Visual Aids</a>
+  </nav>
+
+  <form method="POST" style="display: flex; flex-direction: column; gap: 15px; align-items: center;">
+    <label for="class"><strong>Which Class do you want the worksheet for?</strong></label>
+    <select name="class" id="class" required style="padding: 8px; width: 70%;">
+      <option value="">-- Select Class --</option>
+      {% for i in range(1, 13) %}
+        <option value="Class {{ i }}">Class {{ i }}</option>
+      {% endfor %}
+    </select>
+
+    <textarea name="description" placeholder="Enter the topic or textbook description..." rows="4" required style="width: 70%; padding: 10px;"></textarea>
+
+    <select name="language" required style="padding: 8px; width: 70%;">
+      <option value="">-- Select Language --</option>
+      <option value="english">English</option>
+      <option value="assamese">Assamese</option>
+      <option value="hindi">Hindi</option>
+      <option value="marathi">Marathi</option>
+    </select>
+
+    <button type="submit" style="padding: 10px 30px;">Generate</button>
+  </form>
+
+  {% if result %}
+    <h3 style="margin-top: 30px;">Generated Worksheet:</h3>
+    <div class="output" style="text-align: left; padding: 15px; border: 1px solid #ccc; background: #f9f9f9; margin-top: 10px;">
+      {{ result|safe }}
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
